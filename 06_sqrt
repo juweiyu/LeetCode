@@ -1,0 +1,13 @@
+def mySqrt(s):
+    lo, hi = 0, s
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if mid ** 2 <= s < (mid + 1) ** 2:
+            return mid
+        elif mid ** 2 < s:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+
+
+print(mySqrt(9))
