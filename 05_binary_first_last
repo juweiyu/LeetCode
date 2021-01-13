@@ -1,0 +1,38 @@
+def searchRange(nums, target):
+    lo, hi = 0, len(nums) - 1
+    left, right = -1, -1
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if nums[mid] > target:
+            hi = mid - 1
+        elif nums[mid] < target:
+            lo = mid + 1
+        else:
+            left_lo, left_hi = lo, mid
+            right_lo, right_hi = mid, hi
+            while left_lo <= left_hi:
+                left_mid = (left_lo + left_hi) // 2
+                if (left_mid == 0 or nums[left_mid - 1] < target) and nums[left_mid] == target:
+                    left = left_mid
+                    break
+                elif nums[left_mid] == target:
+                    left_hi = left_mid - 1
+                else:
+                    left_lo = left_mid + 1
+
+            while right_lo <= right_hi:
+                right_mid = (right_lo + right_hi) // 2
+                if (right_mid + 1 == len(nums) or nums[right_mid + 1] > target) and nums[right_mid] == target:
+                    right = right_mid
+                    break
+                elif nums[right_mid] == target:
+                    right_lo = right_mid + 1
+                else:
+                    right_hi = right_mid - 1
+            break
+    return [left, right]
+
+
+nums = [1, 2, 3]
+target = 2
+print(searchRange(nums, target))
