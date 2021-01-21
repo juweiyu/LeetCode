@@ -1,0 +1,41 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        if head == None or head.next == None:
+            return head
+        mid = self.getMid(head)
+        left = self.sortList(head)
+        right = self.sortList(mid)
+        return self.mergeLists(left, right)
+    
+    def getMid(self, head: ListNode) -> ListNode:
+        slow = fast = head
+        while fast and fast.next:
+            p = slow
+            slow = slow.next
+            fast = fast.next.next
+        p.next = None
+        return slow
+        
+    
+    def mergeLists(self, left: ListNode, right: ListNode) -> ListNode:
+        head = ListNode()
+        now = head
+        while left != None and right != None:
+            if left. val < right.val:
+                now.next = left
+                left = left.next
+                now = now.next
+            else:
+                now.next = right
+                right = right.next
+                now = now.next
+        if left:
+            now.next = left
+        if right:
+            now.next = right
+        return head.next
