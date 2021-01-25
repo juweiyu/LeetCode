@@ -1,0 +1,48 @@
+class Solution:
+    output = []
+    matrix = []
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        row = len(matrix)
+        col = len(matrix[0])
+        self.output = []
+        self.matrix = matrix
+        i = j = 0
+        k = 0  # direction
+        while row > 0 and col > 0:
+            if k == 0:
+                i, j, row, col, k = self.right(i, j, row, col)
+            elif k == 1:
+                i, j, row, col, k = self.down(i, j, row, col)
+            elif k == 2:
+                i, j, row, col, k = self.left(i, j, row, col)
+            else:
+                i, j, row, col, k = self.up(i, j, row, col)
+
+        return self.output
+    
+    def right(self, i: int, j: int, row: int, col: int):
+        # to the right
+        for n in range(j, j + col):
+            self.output.append(self.matrix[i][n])
+        return i + 1, j + col - 1, row - 1, col, 1
+
+
+    def down(self, i: int, j: int, row: int, col: int):
+        # going down
+        for n in range(i, i + row):
+            self.output.append(self.matrix[n][j])
+        return i + row - 1, j - 1, row, col - 1, 2
+
+
+    def left(self, i: int, j: int, row: int, col: int):
+        # to the left
+        for n in range(j, j - col, -1):
+            self.output.append(self.matrix[i][n])
+        return i - 1, j - col + 1, row - 1, col, 3
+
+
+    def up(self, i: int, j: int, row: int, col: int):
+        # going up
+        for n in range(i, i - row, -1):
+            self.output.append(self.matrix[n][j])
+        return i - row + 1, j + 1, row, col - 1, 0
