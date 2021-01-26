@@ -1,0 +1,31 @@
+def isValidSudoku(board):
+    row_set = [[] for i in range(9)]
+    col_set = [[] for i in range(9)]
+    cell_set = [[] for i in range(9)]
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] != ".":
+                if (board[i][j] not in row_set[i]) and (board[i][j] not in col_set[j]) and (
+                        board[i][j] not in cell_set[find_cell(i, j)]):
+                    row_set[i].append(board[i][j])
+                    col_set[j].append(board[i][j])
+                    cell_set[find_cell(i, j)].append(board[i][j])
+                else:
+                    return False
+    return True
+
+
+def find_cell(i, j):
+    return 3 * (j // 3) + (i // 3)
+
+board = [["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+
+print(isValidSudoku(board))
