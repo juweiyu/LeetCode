@@ -1,0 +1,22 @@
+# not dfs?
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        global_longest = 0
+        local_longest = 0
+        num_set = set(nums)
+        
+        for n in num_set:
+            current_num = n
+            
+            if current_num - 1 not in num_set:
+                local_longest = 1
+                
+                while current_num + 1 in num_set:
+                    local_longest += 1
+                    current_num += 1
+                
+                global_longest = max(global_longest, local_longest)
+        
+        return global_longest
+                
