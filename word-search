@@ -1,0 +1,31 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        
+        for j in range(0, len(board)):
+            for i in range(0, len(board[0])):
+                if self.dfs(board, word, i, j):
+                    return True
+        return False      
+        
+    def dfs(self, board, word, i, j):
+        if i < 0 or i >= len(board[0]) or j < 0 or j >= len(board):
+            return False
+            
+        elif board[j][i] != word[0]:
+            return False
+        
+        elif len(word) == 1:
+            return True
+            
+        else:
+            temp, board[j][i] = board[j][i], "NAH"
+            result_1 = self.dfs(board, word[1:], i, j - 1)
+            result_2 = self.dfs(board, word[1:], i, j + 1)
+            result_3 = self.dfs(board, word[1:], i - 1, j)
+            result_4 = self.dfs(board, word[1:], i + 1, j)
+            board[j][i] = temp
+                
+            return result_1 or result_2 or result_3 or result_4
+       
+        
+        
