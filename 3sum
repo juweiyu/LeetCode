@@ -1,0 +1,22 @@
+# This code did not pass all the test!
+# error: Time Limit Exceeded
+
+def threeSum(nums):
+    result = []
+    for i in range(len(nums)):
+        first = nums[i]
+        target = -nums[i]
+        for j in range(i + 1, len(nums)):
+            second, num = nums[j], target - nums[j]
+            for k in range(j + 1, len(nums)):
+                if nums[k] == num:
+                    third = nums[k]
+                    output = [first, second, third]
+                    output.sort()
+                    if output not in result:
+                        result.append(output)
+    return result
+
+
+nums = [-1, 0, 1, 2, -1, -4]
+print(threeSum(nums))

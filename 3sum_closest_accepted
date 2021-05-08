@@ -1,0 +1,24 @@
+# this version is accepted by Leetcode
+
+def threeSumClosest(nums, target):
+    nums.sort()
+    diff = float('inf')
+    for i in range(0, len(nums) - 2):
+        j, k = i + 1, len(nums) - 1
+        while k > j:
+            new_diff = abs(target - (nums[i] + nums[j] + nums[k]))
+            if new_diff < diff:
+                output = [nums[i] + nums[j] + nums[k]]
+                diff = new_diff
+            if target == (nums[i] + nums[j] + nums[k]):
+                j, k = j + 1, k - 1
+            elif target < (nums[i] + nums[j] + nums[k]):
+                k = k - 1
+            else:
+                j = j + 1
+    return sum(output)
+
+
+nums = [-1, 2, 1, -4]
+target = 1
+print(threeSumClosest(nums, target))

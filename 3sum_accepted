@@ -1,0 +1,22 @@
+# this is the accepted version
+
+def threeSum(nums):
+    result = []
+    nums.sort()
+    for i in range(0, len(nums) - 2):
+        j, k = i + 1, len(nums) - 1
+        while k > j:
+            if nums[i] + nums[j] + nums[k] == 0:
+                output = [nums[i], nums[j], nums[k]]
+                if output not in result:
+                    result.append(output)
+                j, k = j + 1, k - 1
+            elif nums[i] + nums[j] + nums[k] < 0:
+                j = j + 1
+            else:
+                k = k - 1
+    return result
+
+
+nums = [-2, 0, 1, 1, 2]
+print(threeSum(nums))
